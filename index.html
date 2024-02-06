@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HangMan</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      h1 {
+        text-align: center;
+        color: #097969;
+      }
+      .g-col-6 {
+        text-align: center;
+        color: #77b177;
+      }
+      h2 {
+        text-align: center;
+        color: #097969;
+      }
+      h3 {
+        text-align: center;
+        color: #097969;
+      }
+    </style>
+    <script src="hangman_game.js"></script>
+  </head>
+  <body>
+    <div id="header" class="container text-center">
+      <div class="row">
+        <div class="col"></div>
+        <div class="g-col-12">
+          <h1>JavaScript Final Project:</h1>
+          <h2>Hangman Game</h2>
+        </div>
+        <div class="col"></div>
+      </div>
+    </div>
+    <hr />
+    <div id="Project Info" class="container text-center">
+      <div class="row">
+        <div class="col-4"></div>
+        <div class="g-col-4">
+          <h3 style="text-align: left">Project Information:</h3>
+          <ul>
+            <li style="text-align: left">
+              <strong>Student:</strong> Pablo Ostos Bollmann
+            </li>
+            <li style="text-align: left">
+              <strong>Email:</strong> p.ostos@gmail.com
+            </li>
+            <li style="text-align: left">
+              <strong>Master:</strong> MCSBT (IE)
+            </li>
+            <li style="text-align: left">
+              <strong>Professor:</strong> Carlos Izquierdo Soriano
+            </li>
+          </ul>
+          <br />
+          <h3 style="text-align: left">Link to the project:</h3>
+          <ul>
+            <li style="text-align: left">
+              <a href="https://storage.googleapis.com/hangman_game/HangMan.html"
+                >https://storage.googleapis.com/hangman_game/HangMan.html</a
+              >
+            </li>
+          </ul>
+
+          <br />
+          <h3 style="text-align: left">Description:</h3>
+          <ul>
+            <li style="text-align: left">
+              Hangman is a classic word guessing game that can be played with
+              two or more players. One player thinks of a word and the other
+              player(s) try to guess the word by suggesting letters one at a
+              time. For each incorrect guess, a part of a "hangman" is drawn,
+              typically with a gallows and a stick figure being hanged. The game
+              ends either when the word is guessed correctly or the "hangman" is
+              completed. In a single-player version of the game, the computer
+              chooses a random word and displays a row of dashes to represent
+              the letters in the word. The player then tries to guess the word
+              by suggesting letters one at a time. If the letter is in the word,
+              the computer replaces the corresponding dash(es) with the letter.
+              If the letter is not in the word, the computer adds a part to the
+              hangman. The player continues to guess letters until either the
+              word is correctly guessed or the hangman is completed. The game
+              can be made more challenging by restricting the number of guesses
+              allowed before the hangman is completed. The number of incorrect
+              guesses allowed varies, but a common number is six, which
+              corresponds to the number of parts typically drawn for the hangman
+              (head, body, two arms, and two legs).
+            </li>
+            <li style="text-align: left">
+              This is an extended version of the game which increase the number
+              of lives from six to ten, allowing the player more chances to
+              guess the word before the game ends. With ten lives, the player
+              would have to make ten incorrect guesses before the hangman is
+              completed and the game ends. This would make the game more
+              forgiving and give the player more opportunities to guess the word
+              correctly, but could also make the game last longer and
+              potentially more challenging as the player may have to guess more
+              letters to solve the word. Additionally, increasing the number of
+              lives could encourage the player to take more risks with their
+              guesses, potentially leading to more exciting and unpredictable
+              gameplay.
+            </li>
+          </ul>
+
+          <br />
+
+          <h3 style="text-align: left">Technical Details:</h3>
+          <ul>
+            <li style="text-align: left">
+              <strong>startGame():</strong> is used to start a new game. The
+              function sets the lives and counter variables to 10 and 0,
+              respectively. It then calls clearGrid() function to clear the game
+              board. After that, the function calls getAPIWord() which is a
+              promise-based function that fetches a word from an API. Once the
+              promise is resolved, the my_word variable is assigned the returned
+              value from the API call. Next, the function calls
+              generateWordGrid() which generates the game board based on the
+              length of the my_word variable. It then calls generateKeyboard()
+              which generates the keyboard for the user to input their guesses.
+              Finally, the function updates the src attribute of the image with
+              an id of hangmanPicture to display the starting image of a full
+              hangman (10.png).
+            </li>
+            <li style="text-align: left">
+              <strong>clearGrid():</strong> function that is used to clear the
+              game board whenever a new game is started. The function clears the
+              previous word and keyboard by removing all child nodes from their
+              respective parent elements. It first retrieves the la_wordy
+              element and el_keyboard element using document.getElementById().
+              Then, it uses a while loop to remove all child nodes from these
+              elements until none are left. Finally, it retrieves the
+              main_button element using document.getElementById() and removes
+              all of its child nodes using another while loop.
+            </li>
+            <li style="text-align: left">
+              <strong>generateWordGrid():</strong> This function generates a
+              grid of spaces for each letter in the word. It uses the my_word
+              variable, which is the randomly generated word retrieved from an
+              API in the startGame() function. For each letter in the word, a
+              button element is created and given an id attribute that matches
+              the letter it represents. The innerHTML of each button is set to
+              an underscore ("_"), representing a blank space for the letter to
+              be guessed. Finally, each button element is appended to the grid
+              element, which is an HTML element with an id of "la_wordy".
+            </li>
+            <li style="text-align: left">
+              <strong>generateKeyboard():</strong> This function generates a
+              conventional keyboard by creating an HTML element for each button
+              in the keyboard. The letters in the keyboard are represented in
+              three arrays, one array per row. First, the function accesses the
+              keyboard space by getting the element with the "el_keyboard" id.
+              Then, the function creates a div element to contain the entire
+              keyboard grid and sets its attributes. The function then iterates
+              through each row of the keyboard. For each row, the function
+              creates a div element to contain the row and sets its attributes.
+              Then, the function retrieves the array of letters for the current
+              row and iterates through each letter in the row. For each letter
+              in the row, the function creates a button element, sets its
+              attributes (class, type, id, and onclick), and adds the letter to
+              the innerHTML of the button element. The id attribute of the
+              button is set to the current letter, which is later used to
+              identify the button when the user clicks on it. Finally, the
+              button element is added to the current row, and the row is added
+              to the keyboard grid. The keyboard grid is then added to the
+              keyboard space element.
+            </li>
+            <li style="text-align: left">
+              <strong>letterAttempt():</strong> function responsible for
+              checking whether the letter clicked by the player exists in the
+              target word or not. If the letter exists, it is displayed in the
+              appropriate position(s) of the target word. Otherwise, a life is
+              reduced. The function takes in a parameter letter, which is the
+              letter clicked by the player. The function first gets a reference
+              to the button element that corresponds to the clicked letter using
+              its id. It then sets the class of this button to "btn btn-success
+              disabled" to indicate that the letter has been attempted. Next, it
+              initializes a boolean flag flag to false to keep track of whether
+              the letter exists in the target word or not. It also converts the
+              letter parameter to lowercase and gets a reference to the element
+              that contains the target word using its id. It then gets an array
+              of all the letter elements that make up the target word. The
+              function then iterates through the letter elements of the target
+              word and checks whether the id of each letter element matches the
+              lowercase letter parameter. If there is a match, it sets the
+              innerHTML of the letter element to the uppercase letter, sets the
+              flag variable to true, and increments the counter variable that
+              keeps track of the number of correct attempts. If there is no
+              match, the reduceLife() function is called to reduce a life.
+              Finally, the function checks whether the player has won the game
+              by comparing the counter variable to the length of the target
+              word. If the counter is equal to the length of the target word,
+              the wonGame() function is called.
+            </li>
+            <li style="text-align: left">
+              <strong>reduceLife():</strong> This function reduces the number of
+              lives left in the game by one and updates the hangman picture
+              accordingly. It first decrements the value of the lives variable
+              and then updates the image source of the hangman picture to
+              display the corresponding image for the current number of lives
+              left. If there are no more lives left (i.e., lives < 1), the
+              hangman picture is updated to the final image and the endGame()
+              function is called to end the game. Otherwise, the function
+              updates the image source to display the picture for the current
+              number of lives left. The photoSources object is a mapping between
+              the number of lives left and the corresponding image file name. It
+              is used to easily update the image source based on the number of
+              lives left.
+            </li>
+            <li style="text-align: left">
+              <strong>endGame():</strong> This function is called when the
+              player has run out of lives, and it displays the word that the
+              player was trying to guess. The function first clears the grid,
+              which removes the letter buttons and the keyboard. It then creates
+              a heading element that says "Game Over! the word was:". Next, it
+              iterates through each letter of the word and creates a new button
+              element for each letter. Each button is given the class "btn
+              btn-success" and is assigned an id that matches the letter it
+              represents. The letter is then added as the text content of the
+              button, and the button is added to the grid. Finally, the function
+              creates a "Play Again" button and adds it to the "main_button"
+              element. The button has the class "btn btn-outline-success btn-lg"
+              and an onclick attribute that calls the startGame() function.
+            </li>
+            <li style="text-align: left">
+              The <strong>wonGame()</strong> function is called when the player
+              has successfully guessed all the letters of the word. This
+              function performs the following steps:
+              <ol>
+                <li style="text-align: left">
+                  Clears the grid where the word and keyboard were displayed.
+                </li>
+                <li style="text-align: left">
+                  Adds a header to inform the player that they have won.
+                </li>
+                <li style="text-align: left">
+                  Iterates through the word and creates a button for each letter
+                  to display the word. Adds a "PLAY AGAIN" button to restart the
+                  game.
+                </li>
+                <li style="text-align: left">
+                  Displays an image of "WIN" to indicate the player has won.
+                </li>
+              </ol>
+              Overall, the wonGame() function performs similar actions to the
+              endGame() function, but with different messaging and images based
+              on whether the player has won or lost the game.
+            </li>
+            <li style="text-align: left">
+              <strong>getAPIWord():</strong> fucntion that uses the fetch method
+              to retrieve a random word from the API at API_URL. The response is
+              then converted to JSON format, and the first word in the resulting
+              array is assigned to the global variable api_word. This word is
+              also added to the name attribute of an HTML element with
+              id="la_wordy". Finally, the function logs the word to the console
+              and returns it. Note that this function is dependent on an
+              external API and will only work if the API is accessible and
+              returns data in the expected format.
+            </li>
+          </ul>
+          <br>
+          <h3 style="text-align: left">Version 2.0 improvements:</h3>
+          <ul>
+            <li style="text-align: left">
+              <strong>Multiplayer mode:</strong> Allow players to compete against each other in real-time or take turns guessing words. This would add a new level of excitement and interactivity to the game.
+            </li>
+            <li style="text-align: left">
+              <strong>Hint system: Give</strong> Give players the option to request hints if they are struggling to guess the word. Hints could come in the form of a definition, synonym, or even a letter in the word.
+            </li>
+            <li style="text-align: left">
+              <strong>User profiles:</strong> Allow players to create user profiles and keep track of their game history, scores, and achievements. This would add a social element to the game and make it more personalized for each player.
+            </li>
+            <li style="text-align: left">
+              <strong>Word categories:</strong> Allow players to choose from different word categories such as sports, animals, food, etc. to make the game more interesting and educational.
+            </li>
+          </ul>
+        </div>
+        <div class="col-4"></div>
+      </div>
+    </div>
+
+    <br />
+
+    
+
+    </div>
+  </body>
+</html>
